@@ -130,3 +130,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "config_led.h"
 #define TAPPING_TERM 200
 #define COMBO_COUNT 1
+
+#define MOUSEKEY_DELAY 50
+#define MOUSEKEY_INTERVAL 16
+#define MOUSEKEY_TIME_TO_MAX 0
+#define MOUSEKEY_MAX_SPEED 2.5
