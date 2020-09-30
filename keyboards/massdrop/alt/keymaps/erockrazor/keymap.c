@@ -11,12 +11,32 @@ enum alt_keycodes {
 
 enum combos {
   LALT_4_F4,
+  ENTER_HOME,
+  ENTER_END
+};
+
+enum {
+    TD_PAREN,
+    TD_BRACKET,
+    TD_CURLY
 };
 
 const uint16_t PROGMEM lalt_4_f4[] = {KC_LALT, KC_4, COMBO_END};
+const uint16_t PROGMEM enter_home[] = {KC_ENT, KC_LSFT, COMBO_END};
+const uint16_t PROGMEM enter_end[] = {KC_LCTL, KC_ENT, COMBO_END};
+
+// Tap Dance definitions
+qk_tap_dance_action_t tap_dance_actions[] = {
+    // Tap once for Left Parenthesis, twice for Right Parenthesis
+    [TD_PAREN] = ACTION_TAP_DANCE_DOUBLE(KC_LEFT_PAREN, KC_RIGHT_PAREN),
+    [TD_BRACKET] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_RBRC),
+    [TD_CURLY] = ACTION_TAP_DANCE_DOUBLE(KC_LCBR,  KC_RCBR)
+};
 
 combo_t key_combos[COMBO_COUNT] = {
   [LALT_4_F4] = COMBO_ACTION(lalt_4_f4),
+  [ENTER_HOME] = COMBO_ACTION(enter_home),
+  [ENTER_END] = COMBO_ACTION(enter_end),
 };
 
 void process_combo_event(uint8_t combo_index, bool pressed) {
@@ -24,6 +44,16 @@ void process_combo_event(uint8_t combo_index, bool pressed) {
     case LALT_4_F4:
       if (pressed) {
         tap_code16(LALT(KC_F4));
+      }
+      break;
+    case ENTER_HOME:
+      if (pressed) {
+        tap_code16(KC_HOME);
+      }
+      break;
+    case ENTER_END:
+      if (pressed) {
+        tap_code16(KC_END);
       }
       break;
   }
@@ -39,8 +69,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   LT(3,KC_GRAVE),KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC, KC_DEL,  \
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS, KC_HOME, \
     LT(2,KC_ESC),KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,          KC_ENT,  KC_PGUP, \
-LSFT_T(KC_HOME), KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFT_T(KC_END),          KC_UP,   KC_PGDN, \
-        KC_LCTL, KC_LGUI, KC_LALT,                            KC_SPC,                             KC_RALT, MO(1),   KC_LEFT, KC_DOWN, KC_RGHT  \
+KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, MO(4),          KC_UP,   KC_PGDN, \
+        KC_LCTL, KC_LGUI, KC_LALT,                           KC_SPC,                             KC_RALT, MO(1),   KC_LEFT, KC_DOWN, KC_RGHT  \
     ),
     [1] = LAYOUT_65_ansi_blocker(
         KC_GRV,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, KC_MUTE, \
@@ -53,13 +83,20 @@ LSFT_T(KC_HOME), KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
         _______,KC_LEFT_PAREN,KC_RIGHT_PAREN,KC_LBRC,KC_RBRC,KC_LCBR,KC_RCBR, KC_UNDS, _______, _______, KC_BSPC,  KC_DEL, _______, _______, _______, \
         _______, KC_EQL,  _______,KC_MINS,_______,_______,    KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, KC_ENT, _______,           _______, _______, \
-        _______, _______, _______, _______, _______, KC_BSLASH, _______, _______, _______, _______, _______, _______,          _______, _______, \
+        _______, _______, _______, _______, _______, KC_BSLASH, _______, TD(TD_PAREN), TD(TD_BRACKET), TD(TD_CURLY), _______, _______,          _______, _______, \
         _______, _______, _______,                            _______,                            _______, _______, _______, _______, _______  \
     ),
     [3] = LAYOUT_65_ansi_blocker(
    _______,KC_MS_BTN1,KC_MS_BTN2, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
         _______, _______, _______, _______, _______, _______,KC_MS_LEFT,KC_MS_DOWN,KC_MS_UP,KC_MS_RIGHT, KC_ENT, _______,          _______, _______, \
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______, \
+        _______, _______, _______,                            _______,                            _______, _______, _______, _______, _______  \
+    ),
+    [4] = LAYOUT_65_ansi_blocker(
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+        _______,KC_LEFT_PAREN,KC_RIGHT_PAREN,KC_LBRC,KC_RBRC,KC_LCBR,KC_RCBR, KC_UNDS, _______, _______, _______,  _______, _______, _______, _______, \
+        _______, KC_EQL, _______, KC_MINS, KC_DEL, _______, _______, KC_BSPC, _______, _______, _______, _______,          _______, _______, \
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______, \
         _______, _______, _______,                            _______,                            _______, _______, _______, _______, _______  \
     ),
