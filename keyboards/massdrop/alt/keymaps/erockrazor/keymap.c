@@ -28,6 +28,7 @@ const uint16_t PROGMEM enter_end[] = {KC_LCTL, KC_ENT, COMBO_END};
 // Tap Dance definitions
 qk_tap_dance_action_t tap_dance_actions[] = {
     // Tap once for Left Parenthesis, twice for Right Parenthesis
+    // To add tapdance to keymap, use these commands. TD(TD_PAREN), TD(TD_BRACKET), TD(TD_CURLY),
     [TD_PAREN] = ACTION_TAP_DANCE_DOUBLE(KC_LEFT_PAREN, KC_RIGHT_PAREN),
     [TD_BRACKET] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_RBRC),
     [TD_CURLY] = ACTION_TAP_DANCE_DOUBLE(KC_LCBR,  KC_RCBR)
@@ -81,9 +82,9 @@ KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM,
     ),
     [2] = LAYOUT_65_ansi_blocker(
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-        _______,KC_LEFT_PAREN,KC_RIGHT_PAREN,KC_LBRC,KC_RBRC,KC_LCBR,KC_RCBR, KC_UNDS, _______, _______, KC_BSPC,  KC_DEL, _______, _______, _______, \
-        _______, KC_EQL,  _______,KC_MINS,_______,_______,    KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, KC_ENT, _______,           _______, _______, \
-        _______, _______, _______, _______, _______, KC_BSLASH, _______, TD(TD_PAREN), TD(TD_BRACKET), TD(TD_CURLY), _______, _______,          _______, _______, \
+        _______, _______, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END, _______, _______, _______, _______, _______, \
+        _______, _______,  _______,_______,_______,_______,    KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, _______, _______,           _______, _______, \
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______, \
         _______, _______, _______,                            _______,                            _______, _______, _______, _______, _______  \
     ),
     [3] = LAYOUT_65_ansi_blocker(
