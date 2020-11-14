@@ -9,11 +9,9 @@ enum alt_keycodes {
     MD_BOOT,               //Restart into bootloader after hold timeout
 };
 
-enum combos {
-  LALT_4_F4,
-  ENTER_HOME,
-  ENTER_END
-};
+// enum combos {
+//   LALT_4_F4,
+// };
 
 enum {
     TD_PAREN,
@@ -21,9 +19,7 @@ enum {
     TD_CURLY
 };
 
-const uint16_t PROGMEM lalt_4_f4[] = {KC_LALT, KC_4, COMBO_END};
-const uint16_t PROGMEM enter_home[] = {KC_ENT, KC_LSFT, COMBO_END};
-const uint16_t PROGMEM enter_end[] = {KC_LCTL, KC_ENT, COMBO_END};
+// const uint16_t PROGMEM lalt_4_f4[] = {KC_LALT, KC_4, COMBO_END};
 
 // Tap Dance definitions
 qk_tap_dance_action_t tap_dance_actions[] = {
@@ -34,29 +30,17 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_CURLY] = ACTION_TAP_DANCE_DOUBLE(KC_LCBR,  KC_RCBR)
 };
 
-combo_t key_combos[COMBO_COUNT] = {
-  [LALT_4_F4] = COMBO_ACTION(lalt_4_f4),
-  [ENTER_HOME] = COMBO_ACTION(enter_home),
-  [ENTER_END] = COMBO_ACTION(enter_end),
-};
+// combo_t key_combos[COMBO_COUNT] = {
+//   [LALT_4_F4] = COMBO_ACTION(lalt_4_f4),
+// };
 
 void process_combo_event(uint8_t combo_index, bool pressed) {
   switch(combo_index) {
-    case LALT_4_F4:
-      if (pressed) {
-        tap_code16(LALT(KC_F4));
-      }
-      break;
-    case ENTER_HOME:
-      if (pressed) {
-        tap_code16(KC_HOME);
-      }
-      break;
-    case ENTER_END:
-      if (pressed) {
-        tap_code16(KC_END);
-      }
-      break;
+    // case LALT_4_F4:
+    //   if (pressed) {
+    //     tap_code16(LALT(KC_F4));
+    //   }
+    //   break;
   }
 }
 
